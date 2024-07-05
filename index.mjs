@@ -11,30 +11,10 @@ const port = 3000;
 const USER = "example@protect.app";
 const OTHER_USER = "other@protect.app";
 const ITEMS = [
-  {
-    id: 1,
-    name: "Public Item",
-    owner: USER,
-    private: false,
-  },
-  {
-    id: 2,
-    name: "Shared Item",
-    owner: OTHER_USER,
-    private: false,
-  },
-  {
-    id: 3,
-    name: "Private Item",
-    owner: USER,
-    private: true,
-  },
-  {
-    id: 4,
-    name: "Blocked Item",
-    owner: OTHER_USER,
-    private: true,
-  },
+  { id: 1, name: "Public Item", owner: USER, private: false },
+  { id: 2, name: "Shared Item", owner: OTHER_USER, private: false },
+  { id: 3, name: "Private Item", owner: USER, private: true },
+  { id: 4, name: "Blocked Item", owner: OTHER_USER, private: true },
 ];
 
 const aj = arcjet({
@@ -58,11 +38,16 @@ const permit = new Permit({
 });
 
 const authorizeList = async (req, list) => {
+  // Get the bot detection decision from ArcJet
   const decision = await aj.protect(req);
   const isBot = decision.results.find((r) => r.reason.isBot());
   const {
     reason: { botType = false },
   } = isBot;
+
+  // Check authorization for each item in the list
+  // For each user, we will add the botType attribute
+  // For each resource, we will add the item attributes
   const authorizationFilter = await permit.bulkCheck(
     list.map((item) => ({
       user: {
@@ -80,6 +65,7 @@ const authorizeList = async (req, list) => {
       },
     }))
   );
+
   return list.filter((item, index) => authorizationFilter[index]);
 };
 
