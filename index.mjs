@@ -32,7 +32,6 @@ const aj = arcjet({
   ],
 });
 
-
 const permit = new Permit({
   pdp: PDP_URL,
   token: PDP_API_KEY,
@@ -74,7 +73,11 @@ app.get("/", async (req, res, next) => {
   const items = await authorizeList(req, ITEMS);
   res
     .type("text/plain")
-    .send(items.map(({ id, name }) => `${id}: ${name}`).join("\r\n"));
+    .send(
+      items.length
+        ? items.map(({ id, name }) => `${id}: ${name}`).join("\r\n")
+        : "No items found"
+    );
 });
 
 app.listen(port, "0.0.0.0", () => {
