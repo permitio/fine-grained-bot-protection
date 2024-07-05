@@ -7,7 +7,7 @@ dotenv.config();
 const { ARCJET_KEY, PDP_URL, PDP_API_KEY } = process.env;
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const USER = "example@protect.app";
 const OTHER_USER = "other@protect.app";
 const ITEMS = [
@@ -32,7 +32,6 @@ const aj = arcjet({
   ],
 });
 
-console.log(PDP_URL)
 
 const permit = new Permit({
   pdp: PDP_URL,
@@ -41,7 +40,6 @@ const permit = new Permit({
 
 const authorizeList = async (req, list) => {
   // Get the bot detection decision from ArcJet
-  console.log("authorizeList")
   const decision = await aj.protect(req);
   const isBot = decision.results.find((r) => r.reason.isBot());
   const {
@@ -73,13 +71,12 @@ const authorizeList = async (req, list) => {
 };
 
 app.get("/", async (req, res, next) => {
-  console.log("GET /")
   const items = await authorizeList(req, ITEMS);
   res
     .type("text/plain")
     .send(items.map(({ id, name }) => `${id}: ${name}`).join("\r\n"));
 });
 
-app.listen(port, "127.0.0.1", () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`FGA Bot Protection app listening on port ${port}`);
 });
