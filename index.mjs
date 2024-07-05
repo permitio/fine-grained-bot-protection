@@ -41,6 +41,7 @@ const permit = new Permit({
 
 const authorizeList = async (req, list) => {
   // Get the bot detection decision from ArcJet
+  console.log("authorizeList")
   const decision = await aj.protect(req);
   const isBot = decision.results.find((r) => r.reason.isBot());
   const {
@@ -72,6 +73,7 @@ const authorizeList = async (req, list) => {
 };
 
 app.get("/", async (req, res, next) => {
+  console.log("GET /")
   const items = await authorizeList(req, ITEMS);
   res
     .type("text/plain")
