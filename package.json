@@ -1,0 +1,27 @@
+{
+  "name": "fine-grained-bot-protection",
+  "version": "1.0.0",
+  "description": "An example authorization middleware for fine-grained bot protection using Arcjet and Permit.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.mjs"
+  },
+  "keywords": [
+    "authorization",
+    "express",
+    "permit.io",
+    "arcjet"
+  ],
+  "author": "gemanor",
+  "license": "ISC",
+  "dependencies": {
+    "@arcjet/node": "^1.0.0-alpha.18",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "permitio": "^2.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
