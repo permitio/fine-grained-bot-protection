@@ -32,6 +32,8 @@ const aj = arcjet({
   ],
 });
 
+console.log(PDP_URL)
+
 const permit = new Permit({
   pdp: PDP_URL,
   token: PDP_API_KEY,
@@ -77,5 +79,5 @@ app.get("/", async (req, res, next) => {
 });
 
 app.listen(port, "127.0.0.1", () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`FGA Bot Protection app listening on port ${port}`);
 });
