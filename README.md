@@ -3,7 +3,7 @@ This project demonstrates an effective way to handle bots in your application us
 
 By integrating Permit.io and Arcjet, this application showcases how to serve different types of data to various bots and human users, ensuring optimal readiness for GenAI and other bots.
 
-Read more about it in the following blog post: [TBD - Add the link to the blog post](#)
+Read more about it in the following [blog post](https://www.permit.io/blog/introduce-ai-bots-in-applications): [https://www.permit.io/blog/introduce-ai-bots-in-applications](https://www.permit.io/blog/introduce-ai-bots-in-applications)
 
 ## Prerequisites
 - Node.js
